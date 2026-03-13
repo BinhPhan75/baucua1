@@ -1,0 +1,16 @@
+{
+  "short_name": "Bầu Cua",
+  "name": "Bầu Cua 2026",
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/BinhPhan75/baucua/main/unnamed.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#000000"
+}
