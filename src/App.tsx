@@ -170,7 +170,7 @@ export default function App() {
       <div className="w-full max-w-sm flex justify-center items-start mb-3 z-10">
         <div className="bg-gradient-to-b from-[#2a1a0a] to-[#000000] border-2 border-[#b8860b] rounded-full px-8 py-1.5 shadow-[0_4px_12px_rgba(0,0,0,0.6)] flex items-center justify-center">
           <span className="text-[#facc15] font-black text-2xl sm:text-3xl drop-shadow-[0_2px_4px_rgba(0,0,0,1)] tracking-wider">
-            {balance.toLocaleString()}
+            BẦU CUA 2026
           </span>
         </div>
       </div>
