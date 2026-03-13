@@ -185,7 +185,7 @@ export default function App() {
                 key={j} 
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="w-14 h-14 sm:w-16 sm:h-16 bg-black/50 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/10 shadow-xl p-1.5"
+                className="w-16 h-16 sm:w-20 sm:h-20 bg-black/50 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/10 shadow-xl p-1.5"
               >
                 <img 
                   src={SYMBOLS.find(s => s.value === d)?.image} 
@@ -198,7 +198,7 @@ export default function App() {
           ) : (
             <div className="flex gap-2">
               {[1, 1, 1].map((_, i) => (
-                <div key={i} className="w-14 h-14 sm:w-16 sm:h-16 bg-black/20 rounded-xl border border-white/5 flex items-center justify-center text-white/5 font-black text-xl">?</div>
+                <div key={i} className="w-16 h-16 sm:w-20 sm:h-20 bg-black/20 rounded-xl border border-white/5 flex items-center justify-center text-white/5 font-black text-xl">?</div>
               ))}
             </div>
           )}
@@ -220,13 +220,13 @@ export default function App() {
                   key={`0-${dice[0]}`}
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
-                  className="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.4)] flex items-center justify-center border-b-[6px] border-gray-300 relative overflow-hidden"
+                  className="w-24 h-24 sm:w-28 sm:h-28 bg-white rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.4)] flex items-center justify-center border-b-[6px] border-gray-300 relative overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
                   <img 
                     src={SYMBOLS.find(s => s.value === dice[0])?.image} 
                     alt="" 
-                    className="w-15 h-15 sm:w-18 sm:h-18 object-contain relative z-10"
+                    className="w-18 h-18 sm:w-22 sm:h-22 object-contain relative z-10"
                     referrerPolicy="no-referrer"
                   />
                 </motion.div>
@@ -238,13 +238,13 @@ export default function App() {
                   key={`${idx+1}-${val}`}
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
-                  className="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.4)] flex items-center justify-center border-b-[6px] border-gray-300 relative overflow-hidden"
+                  className="w-24 h-24 sm:w-28 sm:h-28 bg-white rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.4)] flex items-center justify-center border-b-[6px] border-gray-300 relative overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
                   <img 
                     src={SYMBOLS.find(s => s.value === val)?.image} 
                     alt="" 
-                    className="w-15 h-15 sm:w-18 sm:h-18 object-contain relative z-10"
+                    className="w-18 h-18 sm:w-22 sm:h-22 object-contain relative z-10"
                     referrerPolicy="no-referrer"
                   />
                 </motion.div>
