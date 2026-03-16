@@ -185,7 +185,7 @@ export default function App() {
                 key={j} 
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="w-16 h-16 sm:w-20 sm:h-20 bg-black/50 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/10 shadow-xl p-1.5"
+                className="w-24 h-24 sm:w-28 sm:h-28 bg-black/50 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/10 shadow-xl p-1.5"
               >
                 <img 
                   src={SYMBOLS.find(s => s.value === d)?.image} 
@@ -198,7 +198,7 @@ export default function App() {
           ) : (
             <div className="flex gap-2">
               {[1, 1, 1].map((_, i) => (
-                <div key={i} className="w-16 h-16 sm:w-20 sm:h-20 bg-black/20 rounded-xl border border-white/5 flex items-center justify-center text-white/5 font-black text-xl">?</div>
+                <div key={i} className="w-24 h-24 sm:w-28 sm:h-28 bg-black/20 rounded-xl border border-white/5 flex items-center justify-center text-white/5 font-black text-xl">?</div>
               ))}
             </div>
           )}
@@ -208,7 +208,7 @@ export default function App() {
       {/* Main Stage */}
       <div className="relative w-full max-w-sm flex flex-col items-center justify-center mb-4">
         {/* Plate */}
-        <div className="relative w-64 h-64 sm:w-72 sm:h-72 bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.6)] border-[12px] border-gray-100 flex items-center justify-center">
+        <div className="relative w-80 h-80 sm:w-96 sm:h-96 bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.6)] border-[12px] border-gray-100 flex items-center justify-center">
           <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white rounded-full" />
           <div className="absolute inset-1.5 border-2 border-gray-100/50 rounded-full" />
           
@@ -220,13 +220,13 @@ export default function App() {
                   key={`0-${dice[0]}`}
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
-                  className="w-24 h-24 sm:w-28 sm:h-28 bg-white rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.4)] flex items-center justify-center border-b-[6px] border-gray-300 relative overflow-hidden"
+                  className="w-32 h-32 sm:w-40 sm:h-40 bg-white rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.4)] flex items-center justify-center border-b-[6px] border-gray-300 relative overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
                   <img 
                     src={SYMBOLS.find(s => s.value === dice[0])?.image} 
                     alt="" 
-                    className="w-18 h-18 sm:w-22 sm:h-22 object-contain relative z-10"
+                    className="w-26 h-26 sm:w-34 sm:h-34 object-contain relative z-10"
                     referrerPolicy="no-referrer"
                   />
                 </motion.div>
@@ -238,13 +238,13 @@ export default function App() {
                   key={`${idx+1}-${val}`}
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
-                  className="w-24 h-24 sm:w-28 sm:h-28 bg-white rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.4)] flex items-center justify-center border-b-[6px] border-gray-300 relative overflow-hidden"
+                  className="w-32 h-32 sm:w-40 sm:h-40 bg-white rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.4)] flex items-center justify-center border-b-[6px] border-gray-300 relative overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
                   <img 
                     src={SYMBOLS.find(s => s.value === val)?.image} 
                     alt="" 
-                    className="w-18 h-18 sm:w-22 sm:h-22 object-contain relative z-10"
+                    className="w-26 h-26 sm:w-34 sm:h-34 object-contain relative z-10"
                     referrerPolicy="no-referrer"
                   />
                 </motion.div>
@@ -323,7 +323,7 @@ export default function App() {
       </div>
 
       {/* Betting Grid */}
-      <div className="w-full max-w-sm grid grid-cols-3 gap-2.5 px-2">
+      <div className="w-full max-w-[300px] grid grid-cols-3 gap-2.5 px-2">
         {SYMBOLS.map((symbol) => {
           const isWinner = isOpen && dice.includes(symbol.value);
           const winCount = dice.filter(v => v === symbol.value).length;
