@@ -6,7 +6,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Volume2, VolumeX, Undo2, Play } from 'lucide-react';
-import { SYMBOLS, Symbol, calculateNextFixedValue } from './constants';
+import { SYMBOLS, Symbol } from './constants';
 
 export default function App() {
   const [gameState, setGameState] = useState<'start' | 'playing'>('start');
@@ -17,6 +17,7 @@ export default function App() {
   const [isOpen, setIsOpen] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const [hasAddedToHistory, setHasAddedToHistory] = useState(true);
+  const [roundCount, setRoundCount] = useState(0);
 
   const shakeDice = useCallback(() => {
     if (isShaking) return;
@@ -25,7 +26,12 @@ export default function App() {
     setIsOpen(false);
     setHasAddedToHistory(false);
 
-    const fixedValue = calculateNextFixedValue(dice);
+    // Rule: 2 rounds +3, then 2 rounds +2
+    const isPlus3 = Math.floor(roundCount / 2) % 2 === 0;
+    const offset = isPlus3 ? 3 : 2;
+    
+    const sum = dice.reduce((a, b) => a + b, 0);
+    const fixedValue = ((sum + offset - 1) % 6) + 1;
     
     setTimeout(() => {
       const randomDie1 = Math.floor(Math.random() * 6) + 1;
@@ -33,8 +39,9 @@ export default function App() {
       const newDice = [fixedValue, randomDie1, randomDie2].sort(() => Math.random() - 0.5);
       setDice(newDice);
       setIsShaking(false);
+      setRoundCount(prev => prev + 1);
     }, 1500);
-  }, [dice, isShaking]);
+  }, [dice, isShaking, roundCount]);
 
   const toggleOpen = () => {
     if (isShaking) return;

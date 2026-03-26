@@ -15,10 +15,3 @@ export const SYMBOLS: Symbol[] = [
   { id: 5, name: "Cua", value: 5, image: "https://raw.githubusercontent.com/BinhPhan75/baucua/main/cua.png", color: "bg-red-100" },
   { id: 6, name: "Tôm", value: 6, image: "https://raw.githubusercontent.com/BinhPhan75/baucua/main/tom.png", color: "bg-pink-100" },
 ];
-
-export const calculateNextFixedValue = (currentDice: number[]): number => {
-  const sum = currentDice.reduce((a, b) => a + b, 0);
-  const result = sum + 3;
-  // Formula: (result - 1) % 6 + 1 to keep it in 1-6 range
-  return ((result - 1) % 6) + 1;
-};
