@@ -26,8 +26,8 @@ export default function App() {
     setIsOpen(false);
     setHasAddedToHistory(false);
 
-    // Rule: 2 rounds +3, then 2 rounds +2
-    const isPlus3 = Math.floor(roundCount / 2) % 2 === 0;
+    // Rule: 3 rounds +3, then 3 rounds +2
+    const isPlus3 = Math.floor(roundCount / 3) % 2 === 0;
     const offset = isPlus3 ? 3 : 2;
     
     const sum = dice.reduce((a, b) => a + b, 0);
@@ -174,17 +174,17 @@ export default function App() {
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
 
       {/* Top Bar */}
-      <div className="w-full max-w-sm flex justify-center items-start mb-3 z-10">
+      <div className="w-full max-w-md flex justify-center items-start mb-3 z-10">
         <div className="bg-gradient-to-b from-[#2a1a0a] to-[#000000] border-2 border-[#b8860b] rounded-full px-8 py-1.5 shadow-[0_4px_12px_rgba(0,0,0,0.6)] flex items-center justify-center">
-          <span className="text-[#facc15] font-black text-2xl sm:text-3xl drop-shadow-[0_2px_4px_rgba(0,0,0,1)] tracking-wider">
+          <span className="text-[#facc15] font-black text-2xl sm:text-4xl drop-shadow-[0_2px_4px_rgba(0,0,0,1)] tracking-wider">
             BẦU CUA 2026
           </span>
         </div>
       </div>
 
       {/* Centered Previous Result (History) */}
-      <div className="w-full max-w-sm flex flex-col items-center mb-3 z-10">
-        <div className="text-white/50 text-[9px] font-bold tracking-[0.2em] mb-1.5 uppercase">Kết quả ván trước</div>
+      <div className="w-full max-w-md flex flex-col items-center mb-4 z-10">
+        <div className="text-white/70 text-[10px] font-bold tracking-[0.3em] mb-2 uppercase drop-shadow-md">Kết quả ván trước</div>
         <div className="flex gap-2">
           {history[0] ? (
             history[0].map((d, j) => (
@@ -192,7 +192,7 @@ export default function App() {
                 key={j} 
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="w-24 h-24 sm:w-28 sm:h-28 bg-black/50 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/10 shadow-xl p-1.5"
+                className="w-28 h-28 sm:w-36 sm:h-36 bg-black/60 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-2xl p-2"
               >
                 <img 
                   src={SYMBOLS.find(s => s.value === d)?.image} 
@@ -205,7 +205,7 @@ export default function App() {
           ) : (
             <div className="flex gap-2">
               {[1, 1, 1].map((_, i) => (
-                <div key={i} className="w-24 h-24 sm:w-28 sm:h-28 bg-black/20 rounded-xl border border-white/5 flex items-center justify-center text-white/5 font-black text-xl">?</div>
+                <div key={i} className="w-28 h-28 sm:w-36 sm:h-36 bg-black/30 rounded-2xl border border-white/10 flex items-center justify-center text-white/10 font-black text-2xl">?</div>
               ))}
             </div>
           )}
@@ -213,11 +213,11 @@ export default function App() {
       </div>
 
       {/* Main Stage */}
-      <div className="relative w-full max-w-sm flex flex-col items-center justify-center mb-4">
+      <div className="relative w-full max-w-md flex flex-col items-center justify-center mb-6">
         {/* Plate */}
-        <div className="relative w-80 h-80 sm:w-96 sm:h-96 bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.6)] border-[12px] border-gray-100 flex items-center justify-center">
+        <div className="relative w-[360px] h-[360px] sm:w-[500px] sm:h-[500px] bg-white rounded-full shadow-[0_30px_80px_rgba(0,0,0,0.7)] border-[14px] border-gray-100 flex items-center justify-center">
           <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white rounded-full" />
-          <div className="absolute inset-1.5 border-2 border-gray-100/50 rounded-full" />
+          <div className="absolute inset-2 border-2 border-gray-100/50 rounded-full" />
           
           {/* Dice on Plate */}
           <div className="flex flex-col items-center gap-1 z-10">
@@ -227,13 +227,13 @@ export default function App() {
                   key={`0-${dice[0]}`}
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
-                  className="w-32 h-32 sm:w-40 sm:h-40 bg-white rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.4)] flex items-center justify-center border-b-[6px] border-gray-300 relative overflow-hidden"
+                  className="w-36 h-36 sm:w-48 sm:h-48 bg-white rounded-2xl shadow-[0_12px_24px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[8px] border-gray-300 relative overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
                   <img 
                     src={SYMBOLS.find(s => s.value === dice[0])?.image} 
                     alt="" 
-                    className="w-26 h-26 sm:w-34 sm:h-34 object-contain relative z-10"
+                    className="w-30 h-30 sm:w-40 sm:h-40 object-contain relative z-10"
                     referrerPolicy="no-referrer"
                   />
                 </motion.div>
@@ -245,13 +245,13 @@ export default function App() {
                   key={`${idx+1}-${val}`}
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
-                  className="w-32 h-32 sm:w-40 sm:h-40 bg-white rounded-xl shadow-[0_8px_20px_rgba(0,0,0,0.4)] flex items-center justify-center border-b-[6px] border-gray-300 relative overflow-hidden"
+                  className="w-36 h-36 sm:w-48 sm:h-48 bg-white rounded-2xl shadow-[0_12px_24px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[8px] border-gray-300 relative overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
                   <img 
                     src={SYMBOLS.find(s => s.value === val)?.image} 
                     alt="" 
-                    className="w-26 h-26 sm:w-34 sm:h-34 object-contain relative z-10"
+                    className="w-30 h-30 sm:w-40 sm:h-40 object-contain relative z-10"
                     referrerPolicy="no-referrer"
                   />
                 </motion.div>
@@ -330,7 +330,7 @@ export default function App() {
       </div>
 
       {/* Betting Grid */}
-      <div className="w-full max-w-[300px] grid grid-cols-3 gap-2.5 px-2">
+      <div className="w-full max-w-[280px] sm:max-w-[320px] grid grid-cols-3 gap-2 px-2 mt-auto pb-4">
         {SYMBOLS.map((symbol) => {
           const isWinner = isOpen && dice.includes(symbol.value);
           const winCount = dice.filter(v => v === symbol.value).length;
