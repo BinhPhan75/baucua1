@@ -205,14 +205,14 @@ export default function App() {
       {/* Main Stage */}
       <div className="relative w-full max-w-sm flex-1 flex flex-col items-center justify-center min-h-0 pt-0 pb-1">
         {/* Plate Container */}
-        <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center shrink-0">
+        <div className="relative w-[280px] h-[280px] sm:w-[440px] sm:h-[440px] flex items-center justify-center shrink-0">
           {/* Plate */}
           <div className="absolute inset-0 bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.6)] border-[10px] border-gray-100 flex items-center justify-center">
             <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white rounded-full" />
             <div className="absolute inset-1.5 border-2 border-gray-100/50 rounded-full" />
             
             {/* Dice on Plate */}
-            <div className="flex flex-col items-center gap-0.5 z-10 scale-95 sm:scale-120">
+            <div className="flex flex-col items-center gap-0.5 z-10 scale-100 sm:scale-130">
               <div className="flex justify-center">
                 {dice[0] && (
                   <motion.div
@@ -267,7 +267,7 @@ export default function App() {
                   y: { type: 'spring', damping: 22, stiffness: 90 },
                   x: { repeat: isShaking ? Infinity : 0, duration: 0.06 }
                 }}
-                className="absolute -inset-2 z-20 cursor-pointer flex items-center justify-center"
+                className="absolute -inset-3 z-20 cursor-pointer flex items-center justify-center"
                 onClick={toggleOpen}
               >
                 <div className="relative w-full h-full flex items-center justify-center rounded-full overflow-hidden shadow-2xl">
@@ -284,7 +284,7 @@ export default function App() {
         </div>
 
         {/* Action Buttons Row */}
-        <div className="w-full flex justify-between items-center mt-1 px-4 shrink-0">
+        <div className="w-full flex justify-between items-center mt-3 mb-2 px-4 shrink-0">
           <motion.button 
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -293,6 +293,7 @@ export default function App() {
           >
             <Undo2 size={20} />
           </motion.button>
+
 
           <button
             onClick={isOpen ? shakeDice : toggleOpen}
