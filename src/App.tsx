@@ -173,18 +173,8 @@ export default function App() {
          }}>
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
 
-      {/* Top Bar */}
-      <div className="w-full max-w-sm flex justify-center items-start mb-2 z-10 shrink-0">
-        <div className="bg-gradient-to-b from-[#2a1a0a] to-[#000000] border-2 border-[#b8860b] rounded-full px-6 py-1 shadow-[0_4px_12px_rgba(0,0,0,0.6)] flex items-center justify-center">
-          <span className="text-[#facc15] font-black text-xl sm:text-4xl drop-shadow-[0_2px_4px_rgba(0,0,0,1)] tracking-wider">
-            BẦU CUA 2026
-          </span>
-        </div>
-      </div>
-
       {/* Centered Previous Result (History) */}
-      <div className="w-full max-w-sm flex flex-col items-center mb-2 z-10 shrink-0">
-        <div className="text-white/70 text-[8px] font-bold tracking-[0.2em] mb-1 uppercase drop-shadow-md">Kết quả ván trước</div>
+      <div className="w-full max-w-sm flex flex-col items-center mb-4 z-10 shrink-0">
         <div className="flex gap-2">
           {history[0] ? (
             history[0].map((d, j) => (
@@ -192,7 +182,7 @@ export default function App() {
                 key={j} 
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="w-20 h-20 sm:w-40 sm:h-40 bg-black/60 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-2xl p-1.5"
+                className="w-24 h-24 sm:w-44 sm:h-44 bg-black/60 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-2xl p-1.5"
               >
                 <img 
                   src={SYMBOLS.find(s => s.value === d)?.image} 
@@ -205,7 +195,7 @@ export default function App() {
           ) : (
             <div className="flex gap-2">
               {[1, 1, 1].map((_, i) => (
-                <div key={i} className="w-20 h-20 sm:w-40 sm:h-40 bg-black/30 rounded-2xl border border-white/10 flex items-center justify-center text-white/10 font-black text-2xl">?</div>
+                <div key={i} className="w-24 h-24 sm:w-44 sm:h-44 bg-black/30 rounded-2xl border border-white/10 flex items-center justify-center text-white/10 font-black text-2xl">?</div>
               ))}
             </div>
           )}
@@ -222,20 +212,20 @@ export default function App() {
             <div className="absolute inset-1.5 border-2 border-gray-100/50 rounded-full" />
             
             {/* Dice on Plate */}
-            <div className="flex flex-col items-center gap-0.5 z-10 scale-85 sm:scale-110">
+            <div className="flex flex-col items-center gap-0.5 z-10 scale-95 sm:scale-120">
               <div className="flex justify-center">
                 {dice[0] && (
                   <motion.div
                     key={`0-${dice[0]}`}
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}
-                    className="w-26 h-26 sm:w-34 sm:h-34 bg-white rounded-xl shadow-[0_8px_16px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[4px] border-gray-300 relative overflow-hidden"
+                    className="w-28 h-28 sm:w-36 sm:h-36 bg-white rounded-xl shadow-[0_8px_16px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[4px] border-gray-300 relative overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
                     <img 
                       src={SYMBOLS.find(s => s.value === dice[0])?.image} 
                       alt="" 
-                      className="w-22 h-22 sm:w-30 sm:h-30 object-contain relative z-10"
+                      className="w-24 h-24 sm:w-32 sm:h-32 object-contain relative z-10"
                       referrerPolicy="no-referrer"
                     />
                   </motion.div>
@@ -247,13 +237,13 @@ export default function App() {
                     key={`${idx+1}-${val}`}
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}
-                    className="w-26 h-26 sm:w-34 sm:h-34 bg-white rounded-xl shadow-[0_8px_16px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[4px] border-gray-300 relative overflow-hidden"
+                    className="w-28 h-28 sm:w-36 sm:h-36 bg-white rounded-xl shadow-[0_8px_16px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[4px] border-gray-300 relative overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
                     <img 
                       src={SYMBOLS.find(s => s.value === val)?.image} 
                       alt="" 
-                      className="w-22 h-22 sm:w-30 sm:h-30 object-contain relative z-10"
+                      className="w-24 h-24 sm:w-32 sm:h-32 object-contain relative z-10"
                       referrerPolicy="no-referrer"
                     />
                   </motion.div>
