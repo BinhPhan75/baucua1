@@ -56,7 +56,7 @@ export default function App() {
 
   if (gameState === 'start') {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden" 
+      <div className="h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden" 
            style={{ 
              backgroundImage: 'url(https://raw.githubusercontent.com/BinhPhan75/baucua/main/unnamed.png)',
              backgroundSize: 'cover',
@@ -66,7 +66,7 @@ export default function App() {
         
         {/* Falling Gold Coins Animation */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {[...Array(12)].map((_, i) => (
+          {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
               initial={{ y: -50, x: Math.random() * 400 - 200, opacity: 0 }}
@@ -94,8 +94,8 @@ export default function App() {
           className="relative z-10 flex flex-col items-center w-full max-w-sm"
         >
           {/* Main Logo Area */}
-          <div className="relative w-64 h-64 sm:w-72 sm:h-72 mb-6 flex items-center justify-center">
-            <div className="absolute inset-0 bg-yellow-500/30 blur-[50px] rounded-full animate-pulse" />
+          <div className="relative w-48 h-48 sm:w-72 sm:h-72 mb-4 flex items-center justify-center">
+            <div className="absolute inset-0 bg-yellow-500/30 blur-[40px] rounded-full animate-pulse" />
             <motion.img 
               src="https://raw.githubusercontent.com/BinhPhan75/baucua/main/unnamed.png"
               alt="Bau Cua"
@@ -108,12 +108,12 @@ export default function App() {
           </div>
 
           {/* Floating Dice */}
-          <div className="flex gap-4 mb-10">
+          <div className="flex gap-3 mb-8">
             {[2, 3, 1].map((val, i) => (
               <motion.div
                 key={i}
                 animate={{ 
-                  y: [0, -15, 0],
+                  y: [0, -12, 0],
                   rotate: [0, 8, -8, 0]
                 }}
                 transition={{ 
@@ -122,13 +122,13 @@ export default function App() {
                   duration: 3.5,
                   ease: "easeInOut"
                 }}
-                className="w-16 h-16 sm:w-20 sm:h-20 bg-white rounded-xl shadow-[0_12px_30px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[6px] border-gray-300 relative overflow-hidden"
+                className="w-12 h-12 sm:w-20 sm:h-20 bg-white rounded-lg shadow-[0_8px_20px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[4px] border-gray-300 relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-gray-200" />
                 <img 
                   src={SYMBOLS.find(s => s.value === val)?.image} 
                   alt=""
-                  className="w-11 h-11 sm:w-14 sm:h-14 object-contain relative z-10"
+                  className="w-8 h-8 sm:w-14 sm:h-14 object-contain relative z-10"
                   referrerPolicy="no-referrer"
                 />
               </motion.div>
@@ -137,13 +137,13 @@ export default function App() {
 
           <button
             onClick={() => setGameState('playing')}
-            className="group relative bg-gradient-to-b from-yellow-200 via-yellow-500 to-yellow-700 text-black font-black text-2xl sm:text-3xl px-12 sm:px-20 py-5 sm:py-6 rounded-full shadow-[0_10px_0_rgb(133,77,14)] active:shadow-none active:translate-y-2 transition-all uppercase tracking-[0.15em] border-2 border-yellow-100/50"
+            className="group relative bg-gradient-to-b from-yellow-200 via-yellow-500 to-yellow-700 text-black font-black text-xl sm:text-3xl px-10 sm:px-20 py-4 sm:py-6 rounded-full shadow-[0_8px_0_rgb(133,77,14)] active:shadow-none active:translate-y-2 transition-all uppercase tracking-[0.1em] border-2 border-yellow-100/50"
           >
             <span className="relative z-10 drop-shadow-md">CHƠI NGAY</span>
             <div className="absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
           </button>
           
-          <div className="mt-12 flex gap-5">
+          <div className="mt-8 flex gap-4">
              <motion.div 
                whileHover={{ scale: 1.1 }}
                whileTap={{ scale: 0.9 }}
@@ -165,7 +165,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-3 sm:p-4 relative overflow-hidden select-none"
+    <div className="h-screen flex flex-col items-center p-2 sm:p-4 relative overflow-hidden select-none"
          style={{ 
            backgroundImage: 'url(https://raw.githubusercontent.com/BinhPhan75/baucua/main/unnamed.png)',
            backgroundSize: 'cover',
@@ -174,17 +174,17 @@ export default function App() {
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
 
       {/* Top Bar */}
-      <div className="w-full max-w-md flex justify-center items-start mb-3 z-10">
-        <div className="bg-gradient-to-b from-[#2a1a0a] to-[#000000] border-2 border-[#b8860b] rounded-full px-8 py-1.5 shadow-[0_4px_12px_rgba(0,0,0,0.6)] flex items-center justify-center">
-          <span className="text-[#facc15] font-black text-2xl sm:text-4xl drop-shadow-[0_2px_4px_rgba(0,0,0,1)] tracking-wider">
+      <div className="w-full max-w-sm flex justify-center items-start mb-2 z-10 shrink-0">
+        <div className="bg-gradient-to-b from-[#2a1a0a] to-[#000000] border-2 border-[#b8860b] rounded-full px-6 py-1 shadow-[0_4px_12px_rgba(0,0,0,0.6)] flex items-center justify-center">
+          <span className="text-[#facc15] font-black text-xl sm:text-4xl drop-shadow-[0_2px_4px_rgba(0,0,0,1)] tracking-wider">
             BẦU CUA 2026
           </span>
         </div>
       </div>
 
       {/* Centered Previous Result (History) */}
-      <div className="w-full max-w-md flex flex-col items-center mb-4 z-10">
-        <div className="text-white/70 text-[10px] font-bold tracking-[0.3em] mb-2 uppercase drop-shadow-md">Kết quả ván trước</div>
+      <div className="w-full max-w-sm flex flex-col items-center mb-2 z-10 shrink-0">
+        <div className="text-white/70 text-[8px] font-bold tracking-[0.2em] mb-1 uppercase drop-shadow-md">Kết quả ván trước</div>
         <div className="flex gap-2">
           {history[0] ? (
             history[0].map((d, j) => (
@@ -192,7 +192,7 @@ export default function App() {
                 key={j} 
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                className="w-28 h-28 sm:w-36 sm:h-36 bg-black/60 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-2xl p-2"
+                className="w-20 h-20 sm:w-40 sm:h-40 bg-black/60 backdrop-blur-md rounded-2xl flex items-center justify-center border border-white/20 shadow-2xl p-1.5"
               >
                 <img 
                   src={SYMBOLS.find(s => s.value === d)?.image} 
@@ -205,7 +205,7 @@ export default function App() {
           ) : (
             <div className="flex gap-2">
               {[1, 1, 1].map((_, i) => (
-                <div key={i} className="w-28 h-28 sm:w-36 sm:h-36 bg-black/30 rounded-2xl border border-white/10 flex items-center justify-center text-white/10 font-black text-2xl">?</div>
+                <div key={i} className="w-20 h-20 sm:w-40 sm:h-40 bg-black/30 rounded-2xl border border-white/10 flex items-center justify-center text-white/10 font-black text-2xl">?</div>
               ))}
             </div>
           )}
@@ -213,49 +213,52 @@ export default function App() {
       </div>
 
       {/* Main Stage */}
-      <div className="relative w-full max-w-md flex flex-col items-center justify-center mb-6">
-        {/* Plate */}
-        <div className="relative w-[360px] h-[360px] sm:w-[500px] sm:h-[500px] bg-white rounded-full shadow-[0_30px_80px_rgba(0,0,0,0.7)] border-[14px] border-gray-100 flex items-center justify-center">
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white rounded-full" />
-          <div className="absolute inset-2 border-2 border-gray-100/50 rounded-full" />
-          
-          {/* Dice on Plate */}
-          <div className="flex flex-col items-center gap-1 z-10">
-            <div className="flex justify-center">
-              {dice[0] && (
-                <motion.div
-                  key={`0-${dice[0]}`}
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  className="w-36 h-36 sm:w-48 sm:h-48 bg-white rounded-2xl shadow-[0_12px_24px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[8px] border-gray-300 relative overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
-                  <img 
-                    src={SYMBOLS.find(s => s.value === dice[0])?.image} 
-                    alt="" 
-                    className="w-30 h-30 sm:w-40 sm:h-40 object-contain relative z-10"
-                    referrerPolicy="no-referrer"
-                  />
-                </motion.div>
-              )}
-            </div>
-            <div className="flex gap-1.5">
-              {dice.slice(1).map((val, idx) => (
-                <motion.div
-                  key={`${idx+1}-${val}`}
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  className="w-36 h-36 sm:w-48 sm:h-48 bg-white rounded-2xl shadow-[0_12px_24px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[8px] border-gray-300 relative overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
-                  <img 
-                    src={SYMBOLS.find(s => s.value === val)?.image} 
-                    alt="" 
-                    className="w-30 h-30 sm:w-40 sm:h-40 object-contain relative z-10"
-                    referrerPolicy="no-referrer"
-                  />
-                </motion.div>
-              ))}
+      <div className="relative w-full max-w-sm flex-1 flex flex-col items-center justify-center min-h-0 py-2">
+        {/* Plate Container */}
+        <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center shrink-0">
+          {/* Plate */}
+          <div className="absolute inset-0 bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.6)] border-[10px] border-gray-100 flex items-center justify-center">
+            <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white rounded-full" />
+            <div className="absolute inset-1.5 border-2 border-gray-100/50 rounded-full" />
+            
+            {/* Dice on Plate */}
+            <div className="flex flex-col items-center gap-0.5 z-10 scale-85 sm:scale-110">
+              <div className="flex justify-center">
+                {dice[0] && (
+                  <motion.div
+                    key={`0-${dice[0]}`}
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    className="w-26 h-26 sm:w-34 sm:h-34 bg-white rounded-xl shadow-[0_8px_16px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[4px] border-gray-300 relative overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
+                    <img 
+                      src={SYMBOLS.find(s => s.value === dice[0])?.image} 
+                      alt="" 
+                      className="w-22 h-22 sm:w-30 sm:h-30 object-contain relative z-10"
+                      referrerPolicy="no-referrer"
+                    />
+                  </motion.div>
+                )}
+              </div>
+              <div className="flex gap-1">
+                {dice.slice(1).map((val, idx) => (
+                  <motion.div
+                    key={`${idx+1}-${val}`}
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    className="w-26 h-26 sm:w-34 sm:h-34 bg-white rounded-xl shadow-[0_8px_16px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[4px] border-gray-300 relative overflow-hidden"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
+                    <img 
+                      src={SYMBOLS.find(s => s.value === val)?.image} 
+                      alt="" 
+                      className="w-22 h-22 sm:w-30 sm:h-30 object-contain relative z-10"
+                      referrerPolicy="no-referrer"
+                    />
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -274,14 +277,14 @@ export default function App() {
                   y: { type: 'spring', damping: 22, stiffness: 90 },
                   x: { repeat: isShaking ? Infinity : 0, duration: 0.06 }
                 }}
-                className="absolute -inset-3 z-20 cursor-pointer flex items-center justify-center"
+                className="absolute -inset-2 z-20 cursor-pointer flex items-center justify-center"
                 onClick={toggleOpen}
               >
-                <div className="relative w-full h-full flex items-center justify-center rounded-full overflow-hidden">
+                <div className="relative w-full h-full flex items-center justify-center rounded-full overflow-hidden shadow-2xl">
                   <img 
                     src="https://raw.githubusercontent.com/BinhPhan75/baucua/main/napbaucua2.png"
                     alt="Nắp Bầu Cua"
-                    className="w-full h-full object-cover drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
+                    className="w-full h-full object-cover"
                     referrerPolicy="no-referrer"
                   />
                 </div>
@@ -291,20 +294,20 @@ export default function App() {
         </div>
 
         {/* Action Buttons Row */}
-        <div className="w-full flex justify-between items-center mt-5 px-4">
+        <div className="w-full flex justify-between items-center mt-3 px-4 shrink-0">
           <motion.button 
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setGameState('start')}
-            className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-b from-gray-800 to-black rounded-full border-2 border-yellow-600/40 flex items-center justify-center text-[#facc15] shadow-xl"
+            className="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-b from-gray-800 to-black rounded-full border-2 border-yellow-600/40 flex items-center justify-center text-[#facc15] shadow-xl"
           >
-            <Undo2 size={24} />
+            <Undo2 size={20} />
           </motion.button>
 
           <button
             onClick={isOpen ? shakeDice : toggleOpen}
             disabled={isShaking}
-            className={`relative px-12 sm:px-16 py-4 sm:py-5 rounded-full font-black text-2xl sm:text-3xl shadow-[0_8px_0_rgba(0,0,0,0.5)] transition-all transform active:translate-y-1 active:shadow-none border-2 border-yellow-200/20 overflow-hidden ${
+            className={`relative px-10 sm:px-16 py-3 sm:py-5 rounded-full font-black text-xl sm:text-3xl shadow-[0_6px_0_rgba(0,0,0,0.5)] transition-all transform active:translate-y-1 active:shadow-none border-2 border-yellow-200/20 overflow-hidden ${
               isShaking 
                 ? 'bg-gray-700 text-gray-500' 
                 : 'bg-gradient-to-b from-[#5c4433] via-[#2a1a0a] to-[#000000] text-[#facc15]'
@@ -322,15 +325,15 @@ export default function App() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => setIsMuted(!isMuted)}
-            className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-b from-gray-800 to-black rounded-full border-2 border-yellow-600/40 flex items-center justify-center text-[#facc15] shadow-xl"
+            className="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-b from-gray-800 to-black rounded-full border-2 border-yellow-600/40 flex items-center justify-center text-[#facc15] shadow-xl"
           >
-            {isMuted ? <VolumeX size={24} /> : <Volume2 size={24} />}
+            {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
           </motion.button>
         </div>
       </div>
 
       {/* Betting Grid */}
-      <div className="w-full max-w-[280px] sm:max-w-[320px] grid grid-cols-3 gap-2 px-2 mt-auto pb-4">
+      <div className="w-full max-w-[260px] sm:max-w-[320px] grid grid-cols-3 gap-2 px-2 mt-auto pb-2 shrink-0">
         {SYMBOLS.map((symbol) => {
           const isWinner = isOpen && dice.includes(symbol.value);
           const winCount = dice.filter(v => v === symbol.value).length;
@@ -375,13 +378,6 @@ export default function App() {
             </div>
           );
         })}
-      </div>
-
-      {/* Footer Info */}
-      <div className="mt-auto py-2 flex flex-col items-center w-full">
-        <div className="text-[#facc15]/30 text-[10px] font-black mt-1 tracking-[0.2em] drop-shadow-sm">
-          MH1: 967.184
-        </div>
       </div>
 
       <style dangerouslySetInnerHTML={{ __html: `
