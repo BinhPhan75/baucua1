@@ -174,7 +174,7 @@ export default function App() {
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
 
       {/* Centered Previous Result (History) */}
-      <div className="w-full max-w-sm flex flex-col items-center mb-4 z-10 shrink-0">
+      <div className="w-full max-w-sm flex flex-col items-center mb-2 z-10 shrink-0">
         <div className="flex gap-2">
           {history[0] ? (
             history[0].map((d, j) => (
@@ -203,7 +203,7 @@ export default function App() {
       </div>
 
       {/* Main Stage */}
-      <div className="relative w-full max-w-sm flex-1 flex flex-col items-center justify-center min-h-0 py-2">
+      <div className="relative w-full max-w-sm flex-1 flex flex-col items-center justify-center min-h-0 pt-0 pb-1">
         {/* Plate Container */}
         <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center shrink-0">
           {/* Plate */}
@@ -284,7 +284,7 @@ export default function App() {
         </div>
 
         {/* Action Buttons Row */}
-        <div className="w-full flex justify-between items-center mt-3 px-4 shrink-0">
+        <div className="w-full flex justify-between items-center mt-1 px-4 shrink-0">
           <motion.button 
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -323,7 +323,7 @@ export default function App() {
       </div>
 
       {/* Betting Grid */}
-      <div className="w-full max-w-[260px] sm:max-w-[320px] grid grid-cols-3 gap-2 px-2 mt-auto pb-2 shrink-0">
+      <div className="w-full max-w-[290px] sm:max-w-[340px] grid grid-cols-3 gap-2 px-2 mt-auto pb-2 shrink-0">
         {SYMBOLS.map((symbol) => {
           const isWinner = isOpen && dice.includes(symbol.value);
           const winCount = dice.filter(v => v === symbol.value).length;
