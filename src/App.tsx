@@ -8,6 +8,96 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Volume2, VolumeX, Undo2, Play } from 'lucide-react';
 import { SYMBOLS, Symbol } from './constants';
 
+function Die3D({ value, className = '' }: { value: number; className?: string }) {
+  const topSymbol = SYMBOLS.find(s => s.value === value);
+  
+  // Custom unique mappings for side faces based on standard layout values
+  // So they represent other different items (1: Nai, 2: Bau, 3: Ga, 4: Ca, 5: Cua, 6: Tom)
+  // Let's make sure the side faces aren't the same as the top face.
+  const leftValue = (value % 6) + 1;
+  const rightValue = ((value + 1) % 6) + 1;
+  
+  const leftSymbol = SYMBOLS.find(s => s.value === leftValue);
+  const rightSymbol = SYMBOLS.find(s => s.value === rightValue);
+
+  return (
+    <div className={`relative cube-3d-container flex items-center justify-center [perspective:1000px] select-none ${className}`}>
+      <div 
+        className="relative [transform-style:preserve-3d] [transform:rotateX(-60deg)_rotateY(45deg)_rotateZ(0deg)]"
+        style={{
+          width: 'var(--cube-size, 76px)',
+          height: 'var(--cube-size, 76px)',
+        }}
+      >
+        {/* Top Face (the rolled outcome face - highly dominant, facing forward clearly) */}
+        <div 
+          className="absolute bg-gradient-to-br from-white via-white to-amber-50/15 border-[2px] border-amber-600/35 rounded-none flex items-center justify-center overflow-hidden"
+          style={{ 
+            width: 'calc(100% + 1.2px)',
+            height: 'calc(100% + 1.2px)',
+            left: '-0.6px',
+            top: '-0.6px',
+            transform: 'rotateX(90deg) translateZ(calc(var(--cube-half, 38px)))',
+            boxShadow: 'inset 0 0 10px rgba(0,0,0,0.02), 0 3px 8px rgba(0,0,0,0.08)'
+          }}
+        >
+          <img 
+            src={topSymbol?.image} 
+            alt="" 
+            className="w-[95%] h-[95%] object-contain animate-fade-in"
+            style={{ transform: 'rotate(45deg)' }}
+            referrerPolicy="no-referrer"
+          />
+        </div>
+
+        {/* Front-Left Face */}
+        <div 
+          className="absolute bg-gradient-to-br from-gray-50 via-gray-100 to-amber-100/10 border-[2px] border-amber-600/25 rounded-none flex items-center justify-center overflow-hidden"
+          style={{ 
+            width: 'calc(100% + 1.2px)',
+            height: 'calc(100% + 1.2px)',
+            left: '-0.6px',
+            top: '-0.6px',
+            transform: 'rotateY(-90deg) translateZ(calc(var(--cube-half, 38px)))',
+            boxShadow: 'inset 0 0 8px rgba(0,0,0,0.03)'
+          }}
+        >
+          {/* Subtle shading overlay for realistic 3D shadow */}
+          <div className="absolute inset-0 bg-black/[0.04] pointer-events-none" />
+          <img 
+            src={leftSymbol?.image} 
+            alt="" 
+            className="w-[90%] h-[90%] object-contain opacity-90"
+            referrerPolicy="no-referrer"
+          />
+        </div>
+
+        {/* Front-Right Face */}
+        <div 
+          className="absolute bg-gradient-to-br from-gray-100 via-gray-200 to-amber-100/15 border-[2px] border-amber-700/25 rounded-none flex items-center justify-center overflow-hidden"
+          style={{ 
+            width: 'calc(100% + 1.2px)',
+            height: 'calc(100% + 1.2px)',
+            left: '-0.6px',
+            top: '-0.6px',
+            transform: 'translateZ(calc(var(--cube-half, 38px)))',
+            boxShadow: 'inset 0 0 8px rgba(0,0,0,0.04)'
+          }}
+        >
+          {/* Slightly darker shading overlay to denote light source direction */}
+          <div className="absolute inset-0 bg-black/[0.12] pointer-events-none" />
+          <img 
+            src={rightSymbol?.image} 
+            alt="" 
+            className="w-[90%] h-[90%] object-contain opacity-85"
+            referrerPolicy="no-referrer"
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [gameState, setGameState] = useState<'start' | 'playing'>('start');
   const [dice, setDice] = useState<number[]>([1, 2, 3]);
@@ -122,15 +212,8 @@ export default function App() {
                   duration: 3.5,
                   ease: "easeInOut"
                 }}
-                className="w-12 h-12 sm:w-20 sm:h-20 bg-white rounded-lg shadow-[0_8px_20px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[4px] border-gray-300 relative overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-white via-white to-gray-200" />
-                <img 
-                  src={SYMBOLS.find(s => s.value === val)?.image} 
-                  alt=""
-                  className="w-8 h-8 sm:w-14 sm:h-14 object-contain relative z-10"
-                  referrerPolicy="no-referrer"
-                />
+                <Die3D value={val} className="cube-small" />
               </motion.div>
             ))}
           </div>
@@ -211,44 +294,61 @@ export default function App() {
             <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white rounded-full" />
             <div className="absolute inset-1.5 border-2 border-gray-100/50 rounded-full" />
             
-            {/* Dice on Plate */}
-            <div className="flex flex-col items-center gap-0.5 z-10 scale-[0.88] sm:scale-[1.12]">
-              <div className="flex justify-center">
-                {dice[0] && (
-                  <motion.div
-                    key={`0-${dice[0]}`}
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    className="w-28 h-28 sm:w-36 sm:h-36 bg-white rounded-xl shadow-[0_8px_16px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[4px] border-gray-300 relative overflow-hidden"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
-                    <img 
-                      src={SYMBOLS.find(s => s.value === dice[0])?.image} 
-                      alt="" 
-                      className="w-24 h-24 sm:w-32 sm:h-32 object-contain relative z-10"
-                      referrerPolicy="no-referrer"
-                    />
-                  </motion.div>
-                )}
-              </div>
-              <div className="flex gap-1">
-                {dice.slice(1).map((val, idx) => (
-                  <motion.div
-                    key={`${idx+1}-${val}`}
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    className="w-28 h-28 sm:w-36 sm:h-36 bg-white rounded-xl shadow-[0_8px_16px_rgba(0,0,0,0.5)] flex items-center justify-center border-b-[4px] border-gray-300 relative overflow-hidden"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-100" />
-                    <img 
-                      src={SYMBOLS.find(s => s.value === val)?.image} 
-                      alt="" 
-                      className="w-24 h-24 sm:w-32 sm:h-32 object-contain relative z-10"
-                      referrerPolicy="no-referrer"
-                    />
-                  </motion.div>
-                ))}
-              </div>
+            {/* Dice on Plate - Spaced triangle layout without overlapping */}
+            <div className="relative w-[190px] h-[160px] sm:w-[270px] sm:h-[230px] flex items-center justify-center z-10 scale-[1.0] sm:scale-[1.12] mx-auto">
+              {/* Top-Left Die */}
+              {dice[0] && (
+                <motion.div
+                  key={`0-${dice[0]}`}
+                  initial={{ scale: 0, rotate: -30 }}
+                  animate={isShaking ? {
+                    scale: 1,
+                    x: [0, -18, 14, -12, 10, -6, 4, 0],
+                    y: [0, 8, -14, 10, -8, 6, -4, 0],
+                    rotate: [0, -15, 12, -8, 6, 0]
+                  } : { scale: 1, rotate: 0 }}
+                  transition={isShaking ? { duration: 1.0, repeat: Infinity } : { type: 'spring', damping: 15 }}
+                  className="absolute top-0 left-0"
+                >
+                  <Die3D value={dice[0]} />
+                </motion.div>
+              )}
+
+              {/* Top-Right Die */}
+              {dice[1] && (
+                <motion.div
+                  key={`1-${dice[1]}`}
+                  initial={{ scale: 0, rotate: -30 }}
+                  animate={isShaking ? {
+                    scale: 1,
+                    x: [0, 14, -18, 10, -12, 4, -6, 0],
+                    y: [0, -10, 14, -8, 10, -4, 6, 0],
+                    rotate: [0, 15, -12, 8, -6, 0]
+                  } : { scale: 1, rotate: 0 }}
+                  transition={isShaking ? { duration: 1.0, delay: 0.05, repeat: Infinity } : { type: 'spring', damping: 15 }}
+                  className="absolute top-0 right-0"
+                >
+                  <Die3D value={dice[1]} />
+                </motion.div>
+              )}
+
+              {/* Bottom-Center Die */}
+              {dice[2] && (
+                <motion.div
+                  key={`2-${dice[2]}`}
+                  initial={{ scale: 0, rotate: -30 }}
+                  animate={isShaking ? {
+                    scale: 1,
+                    x: [0, -10, 14, -14, 10, -4, 4, 0],
+                    y: [0, 14, -8, 12, -12, 4, -4, 0],
+                    rotate: [0, -10, 10, -14, 12, 0]
+                  } : { scale: 1, rotate: 0 }}
+                  transition={isShaking ? { duration: 1.0, delay: 0.1, repeat: Infinity } : { type: 'spring', damping: 15 }}
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2"
+                >
+                  <Die3D value={dice[2]} />
+                </motion.div>
+              )}
             </div>
           </div>
 
@@ -375,6 +475,24 @@ export default function App() {
         @keyframes shimmer {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(100%); }
+        }
+        .cube-3d-container {
+          --cube-size: 76px;
+          --cube-half: 38px;
+        }
+        .cube-small {
+          --cube-size: 40px !important;
+          --cube-half: 20px !important;
+        }
+        @media (min-width: 640px) {
+          .cube-3d-container {
+            --cube-size: 110px;
+            --cube-half: 55px;
+          }
+          .cube-small {
+            --cube-size: 64px !important;
+            --cube-half: 32px !important;
+          }
         }
       `}} />
     </div>
