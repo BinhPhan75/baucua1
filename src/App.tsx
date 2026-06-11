@@ -267,14 +267,14 @@ export default function App() {
                   y: { type: 'spring', damping: 22, stiffness: 90 },
                   x: { repeat: isShaking ? Infinity : 0, duration: 0.06 }
                 }}
-                className="absolute -inset-3 z-20 cursor-pointer flex items-center justify-center"
+                className="absolute inset-0 z-20 cursor-pointer flex items-center justify-center"
                 onClick={toggleOpen}
               >
                 <div className="relative w-full h-full flex items-center justify-center rounded-full overflow-hidden shadow-2xl">
                   <img 
                     src="https://raw.githubusercontent.com/BinhPhan75/baucua/main/napbaucua2.png"
                     alt="Nắp Bầu Cua"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover scale-[1.38] rounded-full"
                     referrerPolicy="no-referrer"
                   />
                 </div>
