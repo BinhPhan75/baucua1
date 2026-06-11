@@ -286,16 +286,16 @@ export default function App() {
       </div>
 
       {/* Main Stage */}
-      <div className="relative w-full max-w-sm flex-1 flex flex-col items-center justify-center min-h-0 pt-0 pb-1">
-        {/* Plate Container */}
-        <div className="relative w-[280px] h-[280px] sm:w-[440px] sm:h-[440px] flex items-center justify-center shrink-0">
+      <div className="relative w-full max-w-sm flex-1 flex flex-col items-center justify-center min-h-0 pt-1 pb-1">
+        {/* Plate Container - size-responsive using the custom CSS classes */}
+        <div className="relative plate-container flex items-center justify-center shrink-0">
           {/* Plate */}
           <div className="absolute inset-0 bg-white rounded-full shadow-[0_20px_60px_rgba(0,0,0,0.6)] border-[10px] border-gray-100 flex items-center justify-center">
             <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white rounded-full" />
             <div className="absolute inset-1.5 border-2 border-gray-100/50 rounded-full" />
             
-            {/* Dice on Plate - Spaced triangle layout without overlapping */}
-            <div className="relative w-[190px] h-[160px] sm:w-[270px] sm:h-[230px] flex items-center justify-center z-10 scale-[1.0] sm:scale-[1.12] mx-auto">
+            {/* Dice on Plate - Spaced triangle layout without overlapping, fully custom responsive inside the .dice-stage class */}
+            <div className="relative dice-stage flex items-center justify-center z-10 mx-auto">
               {/* Top-Left Die */}
               {dice[0] && (
                 <motion.div
@@ -382,49 +382,49 @@ export default function App() {
             )}
           </AnimatePresence>
         </div>
+      </div>
 
-        {/* Action Buttons Row */}
-        <div className="w-full flex justify-between items-center mt-3 mb-2 px-4 shrink-0">
-          <motion.button 
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => setGameState('start')}
-            className="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-b from-gray-800 to-black rounded-full border-2 border-yellow-600/40 flex items-center justify-center text-[#facc15] shadow-xl"
-          >
-            <Undo2 size={20} />
-          </motion.button>
+      {/* Action Buttons Row - now placed directly above the Betting Grid with minimal margins so it touches the board */}
+      <div className="w-full max-w-[290px] sm:max-w-[340px] flex justify-between items-center mb-1.5 px-1 shrink-0 z-10 mt-auto">
+        <motion.button 
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setGameState('start')}
+          className="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-b from-gray-800 to-black rounded-full border-2 border-yellow-600/40 flex items-center justify-center text-[#facc15] shadow-xl"
+        >
+          <Undo2 size={20} />
+        </motion.button>
 
 
-          <button
-            onClick={isOpen ? shakeDice : toggleOpen}
-            disabled={isShaking}
-            className={`relative px-10 sm:px-16 py-3 sm:py-5 rounded-full font-black text-xl sm:text-3xl shadow-[0_6px_0_rgba(0,0,0,0.5)] transition-all transform active:translate-y-1 active:shadow-none border-2 border-yellow-200/20 overflow-hidden ${
-              isShaking 
-                ? 'bg-gray-700 text-gray-500' 
-                : 'bg-gradient-to-b from-[#5c4433] via-[#2a1a0a] to-[#000000] text-[#facc15]'
-            }`}
-          >
-            <span className="relative z-10 tracking-[0.15em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-              {isShaking ? '...' : (isOpen ? 'XÓC' : 'MỞ')}
-            </span>
-            {!isShaking && (
-               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-[shimmer_3s_infinite]" />
-            )}
-          </button>
+        <button
+          onClick={isOpen ? shakeDice : toggleOpen}
+          disabled={isShaking}
+          className={`relative px-10 sm:px-16 py-3 sm:py-5 rounded-full font-black text-xl sm:text-3xl shadow-[0_6px_0_rgba(0,0,0,0.5)] transition-all transform active:translate-y-1 active:shadow-none border-2 border-yellow-200/20 overflow-hidden ${
+            isShaking 
+              ? 'bg-gray-700 text-gray-500' 
+              : 'bg-gradient-to-b from-[#5c4433] via-[#2a1a0a] to-[#000000] text-[#facc15]'
+          }`}
+        >
+          <span className="relative z-10 tracking-[0.15em] drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+            {isShaking ? '...' : (isOpen ? 'XÓC' : 'MỞ')}
+          </span>
+          {!isShaking && (
+             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-[shimmer_3s_infinite]" />
+          )}
+        </button>
 
-          <motion.button 
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={() => setIsMuted(!isMuted)}
-            className="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-b from-gray-800 to-black rounded-full border-2 border-yellow-600/40 flex items-center justify-center text-[#facc15] shadow-xl"
-          >
-            {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
-          </motion.button>
-        </div>
+        <motion.button 
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => setIsMuted(!isMuted)}
+          className="w-10 h-10 sm:w-14 sm:h-14 bg-gradient-to-b from-gray-800 to-black rounded-full border-2 border-yellow-600/40 flex items-center justify-center text-[#facc15] shadow-xl"
+        >
+          {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
+        </motion.button>
       </div>
 
       {/* Betting Grid */}
-      <div className="w-full max-w-[290px] sm:max-w-[340px] grid grid-cols-3 gap-2 px-2 mt-auto pb-2 shrink-0">
+      <div className="w-full max-w-[290px] sm:max-w-[340px] grid grid-cols-3 gap-2 px-1 pb-4 shrink-0">
         {SYMBOLS.map((symbol) => {
           const isWinner = isOpen && dice.includes(symbol.value);
           const winCount = dice.filter(v => v === symbol.value).length;
@@ -476,18 +476,48 @@ export default function App() {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(100%); }
         }
+        .plate-container {
+          width: 290px;
+          height: 290px;
+        }
+        .dice-stage {
+          width: 205px;
+          height: 175px;
+        }
         .cube-3d-container {
-          --cube-size: 76px;
-          --cube-half: 38px;
+          --cube-size: 80px;
+          --cube-half: 40px;
         }
         .cube-small {
           --cube-size: 40px !important;
           --cube-half: 20px !important;
         }
-        @media (min-width: 640px) {
+        @media (min-width: 375px) {
+          .plate-container {
+            width: 335px;
+            height: 335px;
+          }
+          .dice-stage {
+            width: 245px;
+            height: 205px;
+          }
           .cube-3d-container {
-            --cube-size: 110px;
-            --cube-half: 55px;
+            --cube-size: 96px;
+            --cube-half: 48px;
+          }
+        }
+        @media (min-width: 640px) {
+          .plate-container {
+            width: 480px;
+            height: 480px;
+          }
+          .dice-stage {
+            width: 330px;
+            height: 275px;
+          }
+          .cube-3d-container {
+            --cube-size: 130px;
+            --cube-half: 65px;
           }
           .cube-small {
             --cube-size: 64px !important;
