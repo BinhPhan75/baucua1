@@ -212,7 +212,7 @@ export default function App() {
             <div className="absolute inset-1.5 border-2 border-gray-100/50 rounded-full" />
             
             {/* Dice on Plate */}
-            <div className="flex flex-col items-center gap-0.5 z-10 scale-100 sm:scale-130">
+            <div className="flex flex-col items-center gap-0.5 z-10 scale-[0.88] sm:scale-[1.12]">
               <div className="flex justify-center">
                 {dice[0] && (
                   <motion.div
